@@ -6,6 +6,7 @@ export default function EffectHook() {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     const [authenticated, setAuthenticated] = useState('');
+    const [count, setCount] = useState(0);
     const domains = ['naver.com', 'gmail.com', 'kakao.com'];
 
     const onChangeId = (e) => {
@@ -22,6 +23,8 @@ export default function EffectHook() {
 
     const onLogin = () => {
         if (!id.trim()) {
+            // setErrors(prev => ({...prev, idError: '아이디를 입력해주세요.'}));
+            // 이전 상태를 참조하여 새로운 상태를 생성, 아래와 같은 역할을 하지만 이전 값이 필요한 경우가 있음
             setErrors({...errors, idError: '아이디를 입력해주세요.'});
             return;
         }
@@ -54,6 +57,7 @@ export default function EffectHook() {
             {errors.passwordError && <span>{errors.passwordError}</span>}
             <button onClick={onLogin}>로그인</button>
             <span>{authenticated}</span>
+            <span>{count}</span>
         </div>
     )
 }

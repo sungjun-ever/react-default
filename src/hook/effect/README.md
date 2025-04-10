@@ -21,6 +21,27 @@ const [some, setSome] = useState(() => someMethod()); 또는
 const [some, setSome] = useState(someMethod);  
 이렇게 설정하면 초기 한 번은 느릴 수 있어도, 두 번째부터는 처음 초기화된 값을 가져와서 괜찮음.
 
+```
+setCount(count + 2);
+setCount(count + 1);
+setCount(count + 1);
+setCount(count + 1);
+setCount(count + 3);
+연속해서 set을 사용해도 최종적으로 사용된 +3만 적용된다.
+
+setCount(prev => prev + 2);
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+setCount(prev => prev + 1);
+setCount(prev => prev + 3);
+이 경우에는 이전 값을 기준으로 오르기 때문에 더한만큼 올라간다. +8
+
+setCount(count + 2);
+setCount(prev => prev + 1);
+setCount(prev => prev + 3);
+이 경우에는 이전값이 +2된 상태로 +1, +3이 진행
+```
+
 
 ## 파생 상태
 ```
@@ -42,3 +63,7 @@ const onChangeDomain = (e) => {
 위와 같이 두 개의 상태를 조합해서 상태를 만들 필요가 없음.  
 기존 두 개의 상태를 {id + '@' + domain} 합쳐주면 됨.  
 React의 베이스는 Javascript.
+
+# 상태변경 랜더링 시점
+여러 상태변경이 일어나도 배열에 담아놓고 시간을 두고  
+더 이상 변경이 일어나지 않으면 상태변경을 적용하고 해당 컴포넌트 재랜더링이 일어난다.
