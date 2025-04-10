@@ -10,6 +10,17 @@ const onChangeDomain = (e) => {
     console.log(domain); // set 이후에도 naver.com, 변경값은 다음 호출에서 적용됨
 }
 ```
+상태가 변경 될 때마다 component 함수를 실행하는데, 상태가 변경 될 떄는 set\*를 사용 했을 떄에만 변경.  
+예를 들어, Math.random()이 초기값으로 들어가도 set\*으로 상태를 변경한게 아니면 초기값은 변경되지 않음.
+
+초기값으로 어떠한 계산이나 복잡한 로직이 들어가는 경우에는 문제가 생길 수 있음.  
+예를 들어, const [some, setSome] = useState(someMethod());  
+이런 식으로 설정하면 component가 다시 호출 될 때마다 메서드가 돌면서 랜더링 성능에 문제가 생김.  
+- 해결방법(지연초기화/초기화함수 사용):  
+const [some, setSome] = useState(() => someMethod()); 또는  
+const [some, setSome] = useState(someMethod);  
+이렇게 설정하면 초기 한 번은 느릴 수 있어도, 두 번째부터는 처음 초기화된 값을 가져와서 괜찮음.
+
 
 ## 파생 상태
 ```

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function EffectHook() {
-    const [id, setId] = useState('thisIsTestId');
+    const [id, setId] = useState(Math.random());
     const [domain, setDomain] = useState('naver.com');
     const [password, setPassword] = useState('');
     const [authenticated, setAuthenticated] = useState('');
