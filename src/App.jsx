@@ -1,5 +1,5 @@
 import './App.css'
-import EffectHook from './effectHook'
+import EffectHook from './hook/effect/EffectHook'
 
 function App() {
   return (
