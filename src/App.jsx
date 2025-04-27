@@ -1,9 +1,10 @@
 import './App.css'
-import EffectHook from './hook/effect/EffectHook'
+import Signup from './Signup'
 
 function App() {
+  
   return (
-    <EffectHook />
+    <Signup />
   )
 }
 
