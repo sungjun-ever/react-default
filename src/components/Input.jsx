@@ -1,4 +1,6 @@
-export default function Input({ label, type, name, value, onChange, error, ref }) {
+import {memo} from "react";
+
+function Input({ label, type, name, value, onChange, error, ref }) {
   return (
     <div>
       <label>{label}</label>
@@ -7,3 +9,5 @@ export default function Input({ label, type, name, value, onChange, error, ref }
     </div>
   )
 }
+
+export default memo(Input);

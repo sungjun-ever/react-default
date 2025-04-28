@@ -1,40 +1,22 @@
 import './App.css'
-import { useState, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import EmailInput from './components/EmailInput';
 import Input from './components/input';
+import useInput from "./hooks/useInput.jsx";
 
 function Signup() {
-  const [id, setId] = useState();
+  const [id, idRef, onChangeId] = useInput('');
+  const [nickname, nicknameRef, onChangeNickname] = useInput('');
+  const [phone, phoneRef, onChangePhone] = useInput('');
+  const [password, passwordRef, onChangePassword] = useInput('');
   const [domain, setDomain] = useState('naver.com');
-  const idRef = useRef(null);
-  const passwordRef = useRef(null);
-  const nicknameRef = useRef(null);
-  const phoneRef = useRef(null);
-  const [password, setPassword] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [phone, setPhone] = useState('');
+
   const [errors, setErrors] = useState({});
   const [authenticated, setAuthenticated] = useState('');
-  
-  const onChangeId = (e) => {
-    setId(e.target.value);
-  }
 
-  const onChangeDomain = (e) => {
+  const onChangeDomain = useCallback((e) => {
     setDomain(e.target.value);
-  }
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  }
-
-  const onChangeNickname = (e) => {
-    setNickname(e.target.value);
-  }
-
-  const onChangePhone = (e) => {
-    setPhone(e.target.value);
-  }
+  }, []);
 
   const onRegister = () => {
     if (!id.trim()) {
@@ -70,7 +52,7 @@ function Signup() {
 
   return (
     <div>
-      <EmailInput errors={errors} id={id} domain={domain} onChangeId={onChangeId} onChangeDomain={onChangeDomain} idRef={idRef} />
+      <EmailInput errors={errors} id={id} domain={domain} onChangeId={onChangeId} onChangeDomain={onChangeDomain} ref={idRef} />
       <Input label="비밀번호" type="password" name="password" value={password} onChange={onChangePassword} error={errors.passwordError} ref={passwordRef} />
       <Input label="닉네임" type="text" name="nickname" value={nickname} onChange={onChangeNickname} error={errors.nicknameError} ref={nicknameRef} />
       <Input label="전화번호" type="text" name="phone" value={phone} onChange={onChangePhone} error={errors.phoneError} ref={phoneRef} />
